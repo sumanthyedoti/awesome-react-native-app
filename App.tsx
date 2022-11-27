@@ -1,12 +1,12 @@
-import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import React from 'react'
+import {NavigationContainer} from '@react-navigation/native'
+import {createNativeStackNavigator} from '@react-navigation/native-stack'
 
-import {navigationRef} from './src/rootNavigation';
-import routes from './src/routes';
-import * as screens from './src/screens';
+import {navigationRef} from './src/rootNavigation'
+import routes from './src/routes'
+import * as screens from './src/screens'
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator()
 
 export default function App() {
   return (
@@ -20,9 +20,9 @@ export default function App() {
               component={screens[screen.component]}
               options={{title: 'Awesome RN App'}}
             />
-          );
+          )
         })}
       </Stack.Navigator>
     </NavigationContainer>
-  );
+  )
 }
