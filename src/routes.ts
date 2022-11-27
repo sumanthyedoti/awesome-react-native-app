@@ -15,6 +15,11 @@ const routes: Route[] = [
     title: 'RN Default Screen',
     component: 'RNDefaultScreen',
   },
+  {
+    name: 'Worklet',
+    title: 'Worklet',
+    component: 'Worklet',
+  },
 ]
 
 export default routes
