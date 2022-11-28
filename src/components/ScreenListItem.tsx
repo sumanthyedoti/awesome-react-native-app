@@ -1,6 +1,7 @@
 import React from 'react'
 import {Text, StyleSheet, TouchableOpacity} from 'react-native'
 import {navigate} from '../rootNavigation'
+import {fontSize} from '../constants'
 
 type Props = {
   route: {
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   text: {
-    fontSize: 20,
+    fontSize: fontSize.md,
     fontWeight: '500',
   },
 })

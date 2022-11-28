@@ -3,6 +3,7 @@ type Route = {
   title: string
   component: string
 }
+
 // 'component' should match with the screen export name
 const routes: Route[] = [
   {
@@ -19,6 +20,11 @@ const routes: Route[] = [
     name: 'Worklet',
     title: 'Worklet',
     component: 'Worklet',
+  },
+  {
+    name: 'Basic',
+    title: 'Basic',
+    component: 'Basic',
   },
 ]
 
