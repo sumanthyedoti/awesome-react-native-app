@@ -26,6 +26,11 @@ const routes: Route[] = [
     title: 'Basic',
     component: 'Basic',
   },
+  {
+    name: 'ScrollViewXInterpolation',
+    title: 'ScrollViewX Interpolation',
+    component: 'ScrollViewXInterpolation',
+  },
 ]
 
 export default routes
