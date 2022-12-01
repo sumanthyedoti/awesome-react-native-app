@@ -75,7 +75,8 @@ const Props: React.FC<Props> = ({title, index, translateX}) => {
   )
 }
 
-const boxBg = 'dodgerblue'
+const boxBg = 'midnightblue'
+
 const styles = StyleSheet.create({
   container: {
     width,

@@ -4,3 +4,4 @@ export {default as Worklet} from './Worklet'
 // Reanimated
 export {default as Basic} from './reaniamted/Basic'
 export {default as ScrollViewXInterpolation} from './reaniamted/ScrollViewXInterpolation'
+export {default as ColorInterpolation} from './reaniamted/ColorInterpolation'

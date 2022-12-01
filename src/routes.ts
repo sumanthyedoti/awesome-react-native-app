@@ -31,6 +31,11 @@ const routes: Route[] = [
     title: 'ScrollViewX Interpolation',
     component: 'ScrollViewXInterpolation',
   },
+  {
+    name: 'ColorInterpolation',
+    title: 'Color Interpolation',
+    component: 'ColorInterpolation',
+  },
 ]
 
 export default routes
