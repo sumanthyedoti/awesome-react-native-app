@@ -126,7 +126,7 @@ const ColorInterpolation: React.FC = () => {
           onValueChange={isTrue => {
             setTheme(isTrue ? Theme.DARK : Theme.LIGHT)
           }}
-          trackColor={{true: 'violet'}}
+          trackColor={{true: 'violet', false: 'yellow'}}
           thumbColor="#f5f5f5"
         />
       </Animated.View>
