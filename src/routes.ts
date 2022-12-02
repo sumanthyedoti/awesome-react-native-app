@@ -12,11 +12,6 @@ const routes: Route[] = [
     component: 'Home',
   },
   {
-    name: 'RNDefaultScreen',
-    title: 'RN Default Screen',
-    component: 'RNDefaultScreen',
-  },
-  {
     name: 'Worklet',
     title: 'Worklet',
     component: 'Worklet',
@@ -35,6 +30,11 @@ const routes: Route[] = [
     name: 'ColorInterpolation',
     title: 'Color Interpolation',
     component: 'ColorInterpolation',
+  },
+  {
+    name: 'BasicGesture',
+    title: 'Basic Gesture',
+    component: 'BasicGesture',
   },
 ]
 

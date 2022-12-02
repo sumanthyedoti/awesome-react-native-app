@@ -27,7 +27,7 @@ const Props: React.FC<Props> = ({title, index, translateX}) => {
     const borderRadius = interpolate(
       translateX.value,
       inputRange,
-      [SIZE / 2, SIZE / 4, SIZE / 2],
+      [SIZE / 1.2, SIZE / 4, SIZE / 1.2],
       Extrapolation.CLAMP,
     )
     return {
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     borderColor: boxBg,
     borderStyle: 'solid',
-    borderWidth: 6,
+    borderWidth: 12,
   },
   textContainer: {},
   text: {

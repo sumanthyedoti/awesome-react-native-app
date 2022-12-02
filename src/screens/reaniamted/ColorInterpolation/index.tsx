@@ -80,7 +80,7 @@ const ColorInterpolation: React.FC = () => {
     }
   })
 
-  let degrees = useSharedValue(0)
+  const degrees = useSharedValue(0)
   const rotationTimingOptions = {
     duration: 4000,
     easing: Easing.linear,
