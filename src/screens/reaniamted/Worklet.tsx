@@ -1,7 +1,7 @@
 import React from 'react'
 import {Text, View, Button, StyleSheet} from 'react-native'
 import {runOnUI, runOnJS} from 'react-native-reanimated'
-import {fontSize} from '../constants'
+import {fontSize} from '../../constants'
 
 // import { Container } from './styles';
 

@@ -1,41 +1,54 @@
-type Route = {
+type Screen = {
   name: string
   title: string
-  component: string
+}
+export type Stack = Screen[]
+
+export const categories = ['Reanimated', 'GestureHandler'] as const
+type Categories = typeof categories[number]
+
+type Stacks = {
+  [K in Categories]: {
+    name: string
+    title: string
+    stack: Stack
+  }
 }
 
-// 'component' should match with the screen export name
-const routes: Route[] = [
-  {
-    name: 'Home',
-    title: 'Home',
-    component: 'Home',
+// 'name' should match with the screen export name
+const stackedRoutes: Stacks = {
+  Reanimated: {
+    name: 'Reanimated',
+    title: 'Reanimated',
+    stack: [
+      {
+        name: 'Worklet',
+        title: 'Worklet',
+      },
+      {
+        name: 'ReanimatedBasic',
+        title: 'Basic',
+      },
+      {
+        name: 'ScrollViewXInterpolation',
+        title: 'ScrollViewX Interpolation',
+      },
+      {
+        name: 'ColorInterpolation',
+        title: 'Color Interpolation',
+      },
+    ],
   },
-  {
-    name: 'Worklet',
-    title: 'Worklet',
-    component: 'Worklet',
+  GestureHandler: {
+    name: 'GestureHandler',
+    title: 'Gesture Handler',
+    stack: [
+      {
+        name: 'BasicGesture',
+        title: 'Basic Gesture',
+      },
+    ],
   },
-  {
-    name: 'Basic',
-    title: 'Basic',
-    component: 'Basic',
-  },
-  {
-    name: 'ScrollViewXInterpolation',
-    title: 'ScrollViewX Interpolation',
-    component: 'ScrollViewXInterpolation',
-  },
-  {
-    name: 'ColorInterpolation',
-    title: 'Color Interpolation',
-    component: 'ColorInterpolation',
-  },
-  {
-    name: 'BasicGesture',
-    title: 'Basic Gesture',
-    component: 'BasicGesture',
-  },
-]
+}
 
-export default routes
+export default stackedRoutes

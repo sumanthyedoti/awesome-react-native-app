@@ -3,11 +3,13 @@ import {Text, StyleSheet, TouchableOpacity} from 'react-native'
 import {navigate} from '../rootNavigation'
 import {fontSize} from '../constants'
 
+import type {Stack} from '../routes'
+
 type Props = {
   route: {
     name: string
     title: string
-    component: string
+    stack?: Stack
   }
 }
 
@@ -27,8 +29,8 @@ export default ScreenListItem
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 30,
-    paddingVertical: 20,
+    paddingHorizontal: 24,
+    paddingVertical: 16,
   },
   text: {
     fontSize: fontSize.md,
