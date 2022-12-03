@@ -16,14 +16,18 @@ const SIZE = 40
 function Basic() {
   const touchX = useSharedValue(0)
   const touchY = useSharedValue(0)
+  const springOptions = {
+    damping: 10,
+    stiffness: 80,
+  }
   const gestureHandler = useAnimatedGestureHandler({
     onActive: e => {
       touchX.value += e.x - SIZE / 2
       touchY.value += e.y - SIZE / 2
     },
     onEnd: _ => {
-      touchX.value = withSpring(0)
-      touchY.value = withSpring(0)
+      touchX.value = withSpring(0, springOptions)
+      touchY.value = withSpring(0, springOptions)
     },
   })
 

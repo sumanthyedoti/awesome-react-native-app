@@ -8,6 +8,9 @@ import * as screens from './src/screens'
 import {ScreensList} from './src/screens'
 import Home from './src/screens/Home'
 import stackedRoutes, {categories} from './src/routes'
+import {enableFreeze} from 'react-native-screens'
+
+enableFreeze()
 
 const Stack = createNativeStackNavigator()
 export default function App() {
