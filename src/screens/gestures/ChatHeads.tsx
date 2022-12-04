@@ -1,5 +1,5 @@
 import React from 'react'
-import {StyleSheet} from 'react-native'
+import {StyleSheet, useWindowDimensions} from 'react-native'
 import {
   Gesture,
   GestureDetector,
@@ -19,6 +19,7 @@ NOTES:
 */
 
 const SIZE = 60
+const HEADER_HEIGHT = 100
 const OFFSET = 6
 
 const springOptions = {
@@ -51,16 +52,17 @@ const useFollowHead = ({x, y, offset = 0}: AnimatedPosition) => {
       ],
     }
   })
-  return {x: followX, y: followY, rStyles, offset: offset || OFFSET}
+  return {x: followX, y: followY, rStyles}
 }
 
 function Basic() {
-  const translateX = useSharedValue(0)
-  const translateY = useSharedValue(0)
+  const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = useWindowDimensions()
+  const translateX = useSharedValue(SCREEN_WIDTH / 2 - SIZE / 2)
+  const translateY = useSharedValue(SCREEN_HEIGHT / 2 - SIZE / 2)
   const context = useSharedValue({x: 0, y: 0})
 
   const pan = Gesture.Pan()
-    .onStart(_ => {
+    .onStart(() => {
       // save last left position
       context.value = {x: translateX.value, y: translateY.value}
     })
@@ -68,11 +70,22 @@ function Basic() {
       translateX.value = context.value.x + e.translationX
       translateY.value = context.value.y + e.translationY
     })
+    .onEnd(() => {
+      if (translateX.value < SCREEN_WIDTH / 2 - SIZE / 2) {
+        translateX.value = 0
+      } else {
+        translateX.value = SCREEN_WIDTH - SIZE
+      }
+      if (translateY.value < 0) {
+        translateY.value = 0
+      } else if (translateY.value > SCREEN_HEIGHT - SIZE - HEADER_HEIGHT) {
+        translateY.value = SCREEN_HEIGHT - SIZE - HEADER_HEIGHT
+      }
+    })
   const {
     x: firstX,
     y: firstY,
     rStyles: rFirstStyle,
-    offset: offsetFirst,
   } = useFollowHead({
     x: translateX,
     y: translateY,
@@ -81,11 +94,10 @@ function Basic() {
     x: secondX,
     y: secondY,
     rStyles: rSecondStyle,
-    offset: offsetSecond,
   } = useFollowHead({
     x: firstX,
     y: firstY,
-    offset: offsetFirst,
+    offset: OFFSET,
   })
   const {
     x: thirdX,
@@ -94,10 +106,16 @@ function Basic() {
   } = useFollowHead({
     x: secondX,
     y: secondY,
-    offset: offsetSecond,
+    offset: OFFSET,
+  })
+  const {rStyles: rFourthStyle} = useFollowHead({
+    x: thirdX,
+    y: thirdY,
+    offset: OFFSET,
   })
   return (
     <GestureHandlerRootView style={styles.container}>
+      <Animated.View style={[styles.circle, styles.fourth, rFourthStyle]} />
       <Animated.View style={[styles.circle, styles.third, rThirdStyle]} />
       <Animated.View style={[styles.circle, styles.second, rSecondStyle]} />
       <GestureDetector gesture={pan}>
@@ -111,8 +129,6 @@ export default Basic
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   circle: {
     position: 'absolute',
@@ -128,5 +144,8 @@ const styles = StyleSheet.create({
   },
   third: {
     backgroundColor: 'lawngreen',
+  },
+  fourth: {
+    backgroundColor: 'fuchsia',
   },
 })
