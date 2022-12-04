@@ -1,33 +1,33 @@
-import Animated, {
-  useAnimatedGestureHandler,
-  useAnimatedStyle,
-  useSharedValue,
-  withSpring,
-} from 'react-native-reanimated'
 import React, {useCallback, useRef} from 'react'
 import {Dimensions, StyleSheet, View} from 'react-native'
 import {
   GestureHandlerRootView,
   PanGestureHandler,
 } from 'react-native-gesture-handler'
+import Animated, {
+  useAnimatedGestureHandler,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated'
 
 const SIZE = 40
 
 function Basic() {
-  const touchX = useSharedValue(0)
-  const touchY = useSharedValue(0)
+  const tanslateX = useSharedValue(0)
+  const translateY = useSharedValue(0)
   const springOptions = {
     damping: 10,
     stiffness: 80,
   }
   const gestureHandler = useAnimatedGestureHandler({
     onActive: e => {
-      touchX.value += e.x - SIZE / 2
-      touchY.value += e.y - SIZE / 2
+      tanslateX.value = e.translationX
+      translateY.value = e.translationY
     },
     onEnd: _ => {
-      touchX.value = withSpring(0, springOptions)
-      touchY.value = withSpring(0, springOptions)
+      tanslateX.value = withSpring(0, springOptions)
+      translateY.value = withSpring(0, springOptions)
     },
   })
 
@@ -37,22 +37,22 @@ function Basic() {
     return {
       transform: [
         {
-          translateX: touchX.value,
+          translateX: tanslateX.value,
         },
         {
-          translateY: touchY.value,
+          translateY: translateY.value,
         },
       ],
     }
   })
   return (
-    <View style={styles.container}>
+    <GestureHandlerRootView style={styles.container}>
       <PanGestureHandler
         onGestureEvent={gestureHandler}
         onHandlerStateChange={onHandlerStateChange}>
         <Animated.View style={[styles.circle, rCircleStyles]} />
       </PanGestureHandler>
-    </View>
+    </GestureHandlerRootView>
   )
 }
 export default Basic

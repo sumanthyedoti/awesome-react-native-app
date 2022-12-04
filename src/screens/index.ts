@@ -7,3 +7,4 @@ export {default as ScrollViewXInterpolation} from './reaniamted/ScrollViewXInter
 export {default as ColorInterpolation} from './reaniamted/ColorInterpolation'
 //Gesures
 export {default as BasicGesture} from './gestures/Basic'
+export {default as ChatHeads} from './gestures/ChatHeads'

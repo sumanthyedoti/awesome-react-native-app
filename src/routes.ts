@@ -47,6 +47,10 @@ const stackedRoutes: Stacks = {
         name: 'BasicGesture',
         title: 'Basic Gesture',
       },
+      {
+        name: 'ChatHeads',
+        title: 'Chat Heads',
+      },
     ],
   },
 }
