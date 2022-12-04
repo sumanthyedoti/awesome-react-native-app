@@ -20,7 +20,7 @@ NOTES:
 */
 
 const SIZE = 60
-const HEADER_HEIGHT = 100
+const HEADER_HEIGHT = 60
 const OFFSET = 8
 
 const springOptions = {
@@ -36,16 +36,20 @@ interface AnimatedPosition {
 const useFollowHead = ({x, y, offset = 0}: AnimatedPosition) => {
   const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = useWindowDimensions()
   const followX = useDerivedValue(() => {
-    if (x.value < SCREEN_WIDTH / 2) {
-      return withSpring(x.value + offset, springOptions)
-    }
-    return withSpring(x.value - offset, springOptions)
+    return withSpring(
+      interpolate(
+        x.value,
+        [0, SCREEN_WIDTH - SIZE],
+        [x.value + offset, x.value - offset],
+      ),
+      springOptions,
+    )
   })
   const followY = useDerivedValue(() => {
     return withSpring(
       interpolate(
         y.value,
-        [0, SCREEN_HEIGHT - SIZE],
+        [0, SCREEN_HEIGHT - SIZE * 4],
         [y.value + offset, y.value - offset],
       ),
       springOptions,
@@ -67,10 +71,10 @@ const useFollowHead = ({x, y, offset = 0}: AnimatedPosition) => {
   return {x: followX, y: followY, rStyles}
 }
 
-function Basic() {
+function ChatHeads() {
   const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = useWindowDimensions()
   const translateX = useSharedValue(SCREEN_WIDTH / 2 - SIZE / 2)
-  const translateY = useSharedValue(SCREEN_HEIGHT / 2 - SIZE / 2)
+  const translateY = useSharedValue(SCREEN_HEIGHT / 2 - SIZE - HEADER_HEIGHT)
   const context = useSharedValue({x: 0, y: 0})
 
   const pan = Gesture.Pan()
@@ -136,10 +140,11 @@ function Basic() {
     </GestureHandlerRootView>
   )
 }
-export default Basic
+export default ChatHeads
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#f0f0f0',
     flex: 1,
   },
   circle: {
