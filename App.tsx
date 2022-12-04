@@ -10,7 +10,14 @@ import Home from './src/screens/Home'
 import stackedRoutes, {categories} from './src/routes'
 import {enableFreeze} from 'react-native-screens'
 
+import type {Categories} from './src/routes'
+
 enableFreeze()
+
+export type RootStackParamList = {
+  Home: undefined
+  ScreenList: {category: Categories}
+}
 
 const Stack = createNativeStackNavigator()
 export default function App() {
@@ -23,15 +30,15 @@ export default function App() {
           options={{title: 'Awesome RN App'}}
         />
         {/* Items in catergories */}
-        {Object.keys(stackedRoutes).map((route, i) => {
+        {categories.map((category, i) => {
           return (
             <Stack.Screen
-              key={i}
-              name={stackedRoutes[route].name}
+              key={i.toString()}
+              name={stackedRoutes[category].name as string}
               component={ScreensList}
-              options={{title: stackedRoutes[route].title}}
+              options={{title: stackedRoutes[category].title}}
               initialParams={{
-                name: stackedRoutes[route].name,
+                category,
               }}
             />
           )

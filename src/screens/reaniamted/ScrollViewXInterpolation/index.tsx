@@ -21,13 +21,13 @@ const ScrollViewXInterpolation: React.FC = () => {
     <Animated.ScrollView
       horizontal
       pagingEnabled
-      scrollEventThrottle={17}
+      scrollEventThrottle={16}
       onScroll={scrollHandler}
       style={styles.container}>
       {words.map((word, index) => {
         return (
           <Page
-            key={index}
+            key={index.toString()}
             title={word}
             index={index}
             translateX={scrollOffsetX}

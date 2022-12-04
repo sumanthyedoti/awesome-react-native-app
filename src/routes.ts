@@ -5,11 +5,11 @@ type Screen = {
 export type Stack = Screen[]
 
 export const categories = ['Reanimated', 'GestureHandler'] as const
-type Categories = typeof categories[number]
+export type Categories = typeof categories[number]
 
 type Stacks = {
   [K in Categories]: {
-    name: string
+    name: Categories
     title: string
     stack: Stack
   }

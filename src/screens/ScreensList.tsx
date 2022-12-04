@@ -1,16 +1,19 @@
 import React from 'react'
 import {ScrollView} from 'react-native'
-
+import type {NativeStackScreenProps} from '@react-navigation/native-stack'
 import stackedRoutes from '../routes'
 import {ScreenItem} from '../components'
 
-const Home = ({navigation, route}) => {
-  const {name} = route.params
+import type {RootStackParamList} from '../../App'
+
+type Props = NativeStackScreenProps<RootStackParamList, 'ScreenList'>
+
+const Home = ({route}: Props) => {
+  const {category} = route.params
   return (
     <ScrollView>
-      {stackedRoutes[name].stack.map((route, i) => {
-        console.log({route})
-        return <ScreenItem key={i} route={route} />
+      {stackedRoutes[category].stack.map((routeInfo, i: number) => {
+        return <ScreenItem key={i.toString()} route={routeInfo} />
       })}
     </ScrollView>
   )
