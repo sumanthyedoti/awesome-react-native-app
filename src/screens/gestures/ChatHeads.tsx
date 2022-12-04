@@ -10,6 +10,7 @@ import Animated, {
   useDerivedValue,
   useSharedValue,
   withSpring,
+  interpolate,
 } from 'react-native-reanimated'
 
 /*
@@ -20,7 +21,7 @@ NOTES:
 
 const SIZE = 60
 const HEADER_HEIGHT = 100
-const OFFSET = 6
+const OFFSET = 8
 
 const springOptions = {
   damping: 20,
@@ -33,11 +34,22 @@ interface AnimatedPosition {
   offset: number
 }
 const useFollowHead = ({x, y, offset = 0}: AnimatedPosition) => {
+  const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = useWindowDimensions()
   const followX = useDerivedValue(() => {
+    if (x.value < SCREEN_WIDTH / 2) {
+      return withSpring(x.value + offset, springOptions)
+    }
     return withSpring(x.value - offset, springOptions)
   })
   const followY = useDerivedValue(() => {
-    return withSpring(y.value + offset / 2, springOptions)
+    return withSpring(
+      interpolate(
+        y.value,
+        [0, SCREEN_HEIGHT - SIZE],
+        [y.value + offset, y.value - offset],
+      ),
+      springOptions,
+    )
   })
 
   const rStyles = useAnimatedStyle(() => {
